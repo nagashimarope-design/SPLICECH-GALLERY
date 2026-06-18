@@ -3,410 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPLICEch</title>
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-pub-7913939428080109" crossorigin="anonymous"></script>
-    
+    <title>SPLICECH-GALLERY</title>
     <style>
-        /* テック・サイバーテーマ */
-        :root {
-            --accent-yellow: #ffe600;
-            --nano-black: #0b0b0c;
-            --card-bg: #141416;
-            --text-main: #f4f4f5;
-            --text-muted: #8e8e93;
-            --neon-glow: 0 0 15px rgba(255, 230, 0, 0.4);
-        }
-
+        /* サイト全体のベース設定 */
         body {
-            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
-            background-color: var(--nano-black);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            line-height: 1.7;
-            letter-spacing: 0.05em;
-        }
-
-        /* ヘッダー */
-        header {
-            background-color: rgba(11, 11, 12, 0.95);
-            padding: 60px 20px;
-            text-align: center;
-            border-bottom: 1px solid #222;
-            position: relative;
-            z-index: 10;
-        }
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent-yellow), transparent);
-            z-index: 1;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.8rem;
-            font-weight: 900;
+            background-color: #0b0b0b;
             color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-        }
-        header p {
-            margin: 15px 0 0 0;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            font-weight: 300;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
         }
 
-        /* 公式ボタン（重なり順と貫通対策完了） */
-        .btn-channel {
-            display: inline-block;
-            background-color: transparent;
-            color: var(--accent-yellow);
-            border: 2px solid var(--accent-yellow);
-            padding: 12px 35px;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-top: 25px;
-            transition: all 0.3s ease;
-            box-shadow: var(--neon-glow);
-            
-            position: relative;
-            z-index: 20;
-        }
-        .btn-channel:hover {
-            background-color: var(--accent-yellow);
-            color: var(--nano-black);
-            box-shadow: 0 0 25px rgba(255, 230, 0, 0.7);
+        /* 動画と広告が同列に並ぶグリッド */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            align-items: stretch; /* 広告と動画のカードの高さを揃える */
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 50px 20px;
+        /* 動画カード */
+        .video-card {
+            background: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
-        /* 自動配信広告エリアスタイル */
-        .ads-container {
-            margin: 40px auto;
-            max-width: 728px;
-            text-align: center;
-        }
-        .ads-label {
-            color: #444;
-            font-size: 0.65rem;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-        .ads-slot {
-            background-color: var(--card-bg);
-            border: 1px solid #222;
-            border-radius: 6px;
-            padding: 15px;
-            min-height: 90px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-        }
-
-        /* セクションタイトル */
-        .section-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            color: #ffffff;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            letter-spacing: 2px;
-        }
-        .section-title::before {
-            content: '';
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            background-color: var(--accent-yellow);
-            margin-right: 12px;
-            box-shadow: var(--neon-glow);
-            transform: rotate(45deg);
-        }
-
-        .featured-section {
-            margin-bottom: 70px;
-        }
-
-        /* ビデオラッパー */
+        /* 動画を16:9の比率にする記述 */
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%;
+            padding-bottom: 56.25%; /* 16:9 比率 */
             height: 0;
-            overflow: hidden;
-            border-radius: 12px;
-            border: 1px solid #222;
-            background-color: #000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
+
         .video-wrapper iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: none;
         }
 
-        /* グリッドとカードデザイン */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-        }
-        .video-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #1c1c1e;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        .video-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-yellow);
-            box-shadow: 0 15px 30px rgba(255, 230, 0, 0.1), 0 10px 30px rgba(0,0,0,0.6);
-        }
-        .video-info {
-            padding: 24px;
-        }
-        .video-info h3 {
-            margin: 0 0 12px 0;
-            font-size: 1.2rem;
-            color: #ffffff;
-            font-weight: 600;
-        }
-        .video-info p {
-            margin: 0;
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* フッター */
-        footer {
-            text-align: center;
-            padding: 60px 20px;
-            background-color: #060607;
-            color: #444;
-            font-size: 0.8rem;
-            margin-top: 100px;
-            border-top: 1px solid #121214;
-            letter-spacing: 2px;
-        }
-        .footer-links {
-            margin-bottom: 15px;
-        }
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.2s;
-            cursor: pointer;
-        }
-        .footer-links a:hover {
-            color: var(--accent-yellow);
-        }
-
-        /* モーダル */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(5px);
+        /* 広告カードの見た目を動画に馴染ませる */
+        .video-card.ad-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 10px;
+            display: flex;
             align-items: center;
             justify-content: center;
+            min-height: 200px; /* 広告が空欄の時も形を維持 */
         }
-        .modal-content {
-            background-color: var(--card-bg);
-            border: 1px solid #333;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 700px;
-            max-height: 80vh;
-            overflow-y: auto;
-            padding: 40px;
-            position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-        }
-        .modal-content h2 {
-            color: #ffffff;
-            margin-top: 0;
+
+        .section-title {
+            color: #ffcc00;
             font-size: 1.5rem;
-            border-bottom: 1px solid #333;
-            padding-bottom: 15px;
-        }
-        .modal-content h3 {
-            color: #ffffff;
-            font-size: 1.1rem;
-            margin-top: 25px;
-        }
-        .modal-content p {
-            color: #bcbcbc;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 2rem;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .close-btn:hover {
-            color: var(--accent-yellow);
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>SPLICEch</h1>
-        <p>HIGH-PERFORMANCE ROPE PROCESSING & TECH GALLERY</p>
-        <a href="https://www.youtube.com/@ch-splice" target="_blank" class="btn-channel">LAUNCH CHANNEL</a>
-    </header>
-
-    <div class="ads-container">
-        <div class="ads-label">Sponsored Link</div>
-        <div class="ads-slot">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-pub-7913939428080109"
-                 data-ad-slot="auto"
-                 data-ad-format="auto"
-                 full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-    </div>
-
-    <div class="container">
+    <div class="video-gallery-section">
+        <h2 class="section-title">◆ ROPE WORK ARCHIVES</h2>
         
-        <section class="featured-section">
-            <h2 class="section-title">FEATURED TECH VIDEO</h2>
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/Psmz_GfV9bM" allowfullscreen></iframe>
-            </div>
-        </section>
-
-        <h2 class="section-title">ROPE WORK ARCHIVES</h2>
         <div class="video-grid">
-            
             <div class="video-card">
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/Psmz_GfV9bM" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/XXXXX_EYE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <div class="video-info">
-                    <h3>EYE SPLICE // 基本解説</h3>
-                    <p>高強度シンセティックロープの端末処理。最も基本的でありながら職人の技量が試されるアイスプライスの全工程。</p>
+            </div>
+
+            <div class="video-card ad-card">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" 
+                     data-ad-slot="XXXXXXXXXX"               
+                     data-ad-format="fluid"                  
+                     data-ad-layout-key="-fb+5w+4e-db+86"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/XXXXX_BACK" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
 
             <div class="video-card">
                 <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/ZiaUf9G6q_4" allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <h3>BACK SPLICE // エンド処理</h3>
-                    <p>ロープ末端のほつれを完全に防ぐ、編み込みによる洗練されたエンドテクノロジー。</p>
+                    <iframe src="https://www.youtube.com/embed/XXXXX_ADV" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/ZiaUf9G6q_4" allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <h3>ADVANCED PROCESSING // プレイリスト</h3>
-                    <p>多軸編みロープや特殊高分子ポリエチレン（HMPE）など、次世代繊維ロープの加工技術シリーズ。</p>
-                </div>
-            </div>
-
         </div>
     </div>
-
-    <div class="ads-container">
-        <div class="ads-label">Sponsored Link</div>
-        <div class="ads-slot">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-pub-7913939428080109"
-                 data-ad-slot="auto"
-                 data-ad-format="auto"
-                 full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-    </div>
-
-    <footer>
-        <div class="footer-links">
-            <a onclick="openModal()">プライバシーポリシー</a>
-        </div>
-        <p>&copy; 2026 SPLICEch. SYSTEM OPERATIONAL.</p>
-    </footer>
-
-    <div id="policyModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2>プライバシーポリシー</h2>
-            
-            <h3>個人情報の利用目的について</h3>
-            <p>当サイトでは、お問い合わせやコメントの際にお名前やメールアドレス等の個人情報を入力いただく場合があります。取得した個人情報は、必要な情報を電子メールなどでご連絡する場合にのみ利用し、これらの目的以外では利用いたしません。</p>
-            
-            <h3>広告の配信について（Google AdSense / Amazonアソシエイト）</h3>
-            <p>当サイトでは、第三者配信の広告サービス「Googleアドセンス」を利用しています。広告配信事業者は、ユーザーの興味に応じた広告を表示するためにCookie（クッキー）を使用することがあります。</p>
-            <p>また、当サイトは、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。第三者がコンテンツおよび宣伝を提供し、訪問者から直接情報を収集し、訪問者のブラウザにクッキーを設定したりこれを認識したりする場合があります。</p>
-            
-            <h3>アクセス解析ツールについて</h3>
-            <p>当サイトでは、サイトの分析と改善のためにアクセス解析ツールを利用することがあります。このツールはトラフィックデータの収集のためにCookieを使用しています。トラフィックデータは匿名で収集されており、個人を特定するものではありません。</p>
-            
-            <h3>免責事項</h3>
-            <p>当サイトのコンテンツ・情報について、可能な限り正確な情報を掲載するよう努めておりますが、正確性や安全性を保証するものではありません。当サイトに掲載された内容によって生じた損害等の一切の責任を負いかねますのでご了承ください。また、当サイトからリンクやバナーなどによって他のサイトに移動された場合、移動先サイトで提供される情報、サービス等について一切の責任を負いません。</p>
-        </div>
-    </div>
-
-    <script>
-        function openModal() {
-            document.getElementById("policyModal").style.display = "flex";
-        }
-        function closeModal() {
-            document.getElementById("policyModal").style.display = "none";
-        }
-        window.onclick = function(event) {
-            var modal = document.getElementById("policyModal");
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
 
 </body>
 </html>
