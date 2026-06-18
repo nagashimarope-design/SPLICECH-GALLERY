@@ -3,201 +3,372 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPLICECH-GALLERY</title>
+    <title>SPLICECH-GALLERY | nrkhayato.com</title>
     
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-7913939428080109" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_PUB_ID" crossorigin="anonymous"></script>
 
     <style>
-        /* 全体のシックなデザイン */
+        /* サイト全体の共通デザイン（シックな黒基調） */
         body {
             background-color: #0b0b0b;
             color: #ffffff;
-            font-family: Arial, sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
+        }
+
+        /* ヘッダー・ナビゲーション領域 */
+        header {
+            width: 100%;
+            max-width: 1200px;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            text-align: center;
+            border-bottom: 1px solid #222;
+        }
+        .site-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin: 0;
+            color: #ffffff;
+        }
+        .site-subtitle {
+            font-size: 1rem;
+            color: #888;
+            margin: 10px 0 0 0;
+        }
+
+        /* メインコンテンツ全体のコンテナ */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         /* 【バグ修正済み】LAUNCH CHANNEL ボタンのスタイル */
+        .btn-container {
+            text-align: center;
+            margin: 40px 0;
+        }
         .launch-btn {
             display: inline-block;
-            padding: 15px 40px;
+            padding: 15px 50px;
             background-color: #ffcc00;
-            color: #000;
+            color: #000000;
             font-weight: bold;
+            font-size: 1.1rem;
             text-decoration: none;
             border-radius: 30px;
-            margin: 40px 0;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
         }
         .launch-btn:hover {
             background-color: #e6b800;
+            transform: translateY(-2px);
         }
 
-        /* 動画と広告が同列に並ぶグリッド */
+        /* セクションタイトル */
+        .section-title {
+            color: #ffcc00;
+            font-size: 1.6rem;
+            border-left: 4px solid #ffcc00;
+            padding-left: 15px;
+            margin: 50px 0 20px 0;
+            letter-spacing: 1px;
+        }
+
+        /* プロフィールセクションのデザイン */
+        .profile-card {
+            background: #141414;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .profile-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #ccc;
+            margin: 0;
+        }
+
+        /* 動画と広告が同列に並ぶグリッドシステム */
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 1200px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
             align-items: stretch;
         }
 
         .video-card {
-            background: #1e1e1e;
-            border-radius: 8px;
+            background: #141414;
+            border: 1px solid #222;
+            border-radius: 12px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            transition: transform 0.3s;
+        }
+        .video-card:hover {
+            transform: translateY(-3px);
         }
 
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%;
+            padding-bottom: 56.25%; /* 16:9の比率 */
             height: 0;
+            background: #000;
         }
         .video-wrapper iframe {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
+            border: 0;
         }
 
-        /* 広告カードを動画に馴染ませる設定 */
+        /* 広告カードを動画一覧に美しく馴染ませる設定 */
         .video-card.ad-card {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            padding: 10px;
+            background: #0f0f0f;
+            border: 1px dashed #333;
+            padding: 15px;
             justify-content: center;
             align-items: center;
             min-height: 200px;
         }
+        .ad-label {
+            color: #555;
+            font-size: 10px;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            display: block;
+            text-align: center;
+        }
 
-        /* ページ最下部の広告用エリア（横長バナーなどに対応） */
+        /* ページ最下部のワイド広告エリア */
         .bottom-ad-area {
             width: 100%;
-            max-width: 1200px;
-            margin: 50px 0 20px 0;
+            margin: 60px 0 30px 0;
             text-align: center;
-            background: #1a1a1a;
-            border: 1px solid #333;
-            padding: 15px;
+            background: #141414;
+            border: 1px solid #222;
+            padding: 20px;
             box-sizing: border-box;
-            border-radius: 8px;
+            border-radius: 12px;
         }
 
-        /* プライバシーポリシーのエリア設定 */
-        .privacy-policy-area {
+        /* SNSリンク・フッター領域 */
+        footer {
             width: 100%;
             max-width: 1200px;
-            margin-top: 40px;
-            padding: 20px;
-            background: #111;
-            border-top: 1px solid #222;
+            padding: 40px 20px;
             box-sizing: border-box;
-            font-size: 12px;
+            border-top: 1px solid #222;
+            text-align: center;
+            margin-top: 60px;
+        }
+        .sns-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .sns-link {
             color: #888;
-            line-height: 1.6;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        .sns-link:hover {
+            color: #ffcc00;
+        }
+        .copyright {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        /* プライバシーポリシー領域 */
+        .privacy-policy-area {
+            background: #0f0f0f;
+            border: 1px solid #1a1a1a;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 40px;
+            text-align: left;
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.7;
         }
         .privacy-policy-area h3 {
-            color: #bbb;
-            font-size: 14px;
+            color: #999;
+            font-size: 0.95rem;
             margin-top: 0;
+            margin-bottom: 15px;
         }
-
-        .section-title {
-            color: #ffcc00;
-            font-size: 1.5rem;
-            align-self: flex-start;
-            max-width: 1200px;
-            width: 100%;
-            margin: 40px auto 10px auto;
+        .privacy-policy-area p {
+            margin: 0 0 10px 0;
         }
-
-        .ad-label {
-            color: #444;
-            font-size: 10px;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            display: block;
+        .privacy-policy-area p:last-child {
+            margin-bottom: 0;
         }
     </style>
 </head>
 <body>
 
-    <a href="https://youtube.com/@ch-splice" class="launch-btn" target="_blank">LAUNCH CHANNEL</a>
+    <header>
+        <h1 class="site-title">SPLICECH-GALLERY</h1>
+        <p class="site-subtitle">Ropework Technique & Archives</p>
+    </header>
 
-    <h2 class="section-title">◆ ROPE WORK ARCHIVES</h2>
-    <div class="video-grid">
-        
-        <div class="video-card">
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/tDYx9dssru0" frameborder="0" allowfullscreen></iframe>
-            </div>
+    <div class="container">
+
+        <h2 class="section-title">ABOUT</h2>
+        <div class="profile-card">
+            <p class="profile-text">
+                当サイト（nrkhayato.com）へお越しいただきありがとうございます。<br>
+                ここでは、YouTubeチャンネル「SPLICECH」で公開しているロープワーク、各種スプライス加工（アイスプライス、バックスプライス等）の技術アーカイブをまとめています。実践で役立つ結び方のコツや補足情報を随時発信していきます。
+            </p>
         </div>
 
-        <div class="video-card ad-card">
+        <div class="btn-container">
+            <a href="https://youtube.com/@ch-splice" class="launch-btn" target="_blank">LAUNCH CHANNEL</a>
+        </div>
+
+        <h2 class="section-title">ROPE WORK ARCHIVES</h2>
+        <div class="video-grid">
+            
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/XXXXX_1" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/XXXXX_2" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/XXXXX_3" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-card ad-card">
+                <span class="ad-label">SPONSORED LINK</span>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="YOUR_PUB_ID" 
+                     data-ad-slot="YOUR_SLOT_ID"               
+                     data-ad-format="fluid"                  
+                     data-ad-layout-key="-fb+5w+4e-db+86"
+                     data-full-width-responsive="true"></ins>
+                <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+            </div>
+
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/XXXXX_4" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/XXXXX_5" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/XXXXX_6" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-card ad-card">
+                <span class="ad-label">SPONSORED LINK</span>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="YOUR_PUB_ID" 
+                     data-ad-slot="YOUR_SLOT_ID"               
+                     data-ad-format="fluid"                  
+                     data-ad-layout-key="-fb+5w+4e-db+86"
+                     data-full-width-responsive="true"></ins>
+                <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+            </div>
+
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/XXXXX_7" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/XXXXX_8" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/XXXXX_9" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="video-card ad-card">
+                <span class="ad-label">SPONSORED LINK</span>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="YOUR_PUB_ID" 
+                     data-ad-slot="YOUR_SLOT_ID"               
+                     data-ad-format="fluid"                  
+                     data-ad-layout-key="-fb+5w+4e-db+86"
+                     data-full-width-responsive="true"></ins>
+                <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+            </div>
+
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/XXXXX_10" allowfullscreen></iframe>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="bottom-ad-area">
             <span class="ad-label">SPONSORED LINK</span>
             <ins class="adsbygoogle"
                  style="display:block"
-                 data-ad-client="pub-7913939428080109" 
-                 data-ad-slot="pub-7913939428080109"               
-                 data-ad-format="fluid"                  
-                 data-ad-layout-key="-fb+5w+4e-db+86"
+                 data-ad-client="YOUR_PUB_ID"
+                 data-ad-slot="YOUR_SLOT_ID"
+                 data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
         </div>
 
-        <div class="video-card">
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/OZIiaxxTarY" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-
-        <div class="video-card ad-card">
-            <span class="ad-label">SPONSORED LINK</span>
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="pub-7913939428080109" 
-                 data-ad-slot="pub-7913939428080109"               
-                 data-ad-format="fluid"                  
-                 data-ad-layout-key="-fb+5w+4e-db+86"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-
-        <div class="video-card">
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/0qQw8Z-Yzmg" frameborder="0" allowfullscreen></iframe>
-            </div>
+        <div class="privacy-policy-area">
+            <h3>プライバシーポリシー</h3>
+            <p>当サイト（nrkhayato.com）では、第三者配信による広告サービス「Google AdSense」を利用しています。広告配信事業者は、ユーザーの興味に応じた商品やサービスの広告を表示するため、当サイトや他サイトへのアクセスに関する情報「Cookie」（氏名、住所、メールアドレス、電話番号は含まれません）を使用することがあります。</p>
+            <p>Cookieを無効にする設定およびGoogleアドセンスに関する詳細は、Googleの「広告 - ポリシーと規約」ページをご覧ください。</p>
         </div>
 
     </div>
 
-    <div class="bottom-ad-area">
-        <span class="ad-label">SPONSORED LINK</span>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="pub-7913939428080109"
-             data-ad-slot="pub-7913939428080109"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-
-    <div class="privacy-policy-area">
-        <h3>プライバシーポリシー</h3>
-        <p>当サイト（nrkhayato.com）では、第三者配信による広告サービス「Google AdSense」を利用しています。広告配信事業者は、ユーザーの興味に応じた商品やサービスの広告を表示するため、当サイトや他サイトへのアクセスに関する情報「Cookie」（氏名、住所、メールアドレス、電話番号は含まれません）を使用することがあります。</p>
-        <p>Cookieを無効にする設定およびGoogleアドセンスに関する詳細は、Googleの「広告 - ポリシーと規約」ページをご覧ください。</p>
-    </div>
+    <footer>
+        <div class="sns-links">
+            <a href="https://youtube.com/@ch-splice" class="sns-link" target="_blank">YouTube</a>
+            <a href="#" class="sns-link">X (Twitter)</a>
+            <a href="#" class="sns-link">Instagram</a>
+        </div>
+        <div class="copyright">&copy; 2026 SPLICECH-GALLERY All Rights Reserved.</div>
+    </footer>
 
 </body>
 </html>
