@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPLICECH-GALLERY | nrkhayato.com</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <style>
+        /* CSS Variables for Apple-like Light Theme */
+        :root {
+            --bg-color: #f5f5f7;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --card-bg: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.05);
+            --shadow-subtle: 0 4px 24px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.08);
+            --radius-large: 18px;
+            --radius-pill: 980px;
+        }
+
+        /* Base Setup */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: -0.003em;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        h2 {
+            font-size: 18px;
+            margin: 20px 0 16px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin: 0 0 8px;
+        }
+
+        /* Layout */
+        .header {
+            padding: 20px 20px 16px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            box-shadow: var(--shadow-subtle);
+            max-width: 900px;
+            margin: 0 auto 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            .profile-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 16px;
+            }
+        }
+
+        .profile-text {
+            color: var(--text-primary);
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 0;
+            flex: 1;
+            text-align: left;
+        }
+
+        /* Button */
+        .btn-launch {
+            display: inline-block;
+            flex-shrink: 0;
+            background: var(--text-primary);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-launch:hover {
+            transform: scale(1.05);
+            background: #000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 1024px) {
+            .video-grid { grid-template-columns: repeat(5, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .video-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .video-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            border: 2px solid transparent; /* Prepare for border hover */
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-card:hover {
+            transform: scale(1.2) translateY(-16px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            border-color: #0071e3; /* Apple Blue highlight */
+            z-index: 10;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            background: #e8e8ed;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: 0;
+        }
+
+        /* Custom YouTube Facade */
+        .custom-facade {
+            cursor: pointer;
+            position: relative;
+        }
+        .facade-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
+            z-index: 1;
+        }
+        .facade-play {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 32px;
+            height: 32px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .facade-play::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 6px 0 6px 10px;
+            border-color: transparent transparent transparent #fff;
+            margin-left: 3px;
+        }
+        .video-card:hover .facade-play {
+            background-color: #0071e3;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        .facade-title-bar {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            padding: 24px 8px 6px;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+            z-index: 2;
+            box-sizing: border-box;
+            display: flex;
+            align-items: flex-end;
+        }
+        .facade-title {
+            color: #fff;
+            font-size: 10px;
+            font-weight: 500;
+            line-height: 1.3;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        /* Ad Cards */
+        .video-card.ad-card {
+            background: transparent;
+            border: 1px dashed #d2d2d7;
+            box-shadow: none;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
+            min-height: auto;
+        }
+        
+        .video-card.ad-card:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .ad-label {
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        .bottom-ad-area {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Privacy Policy */
+        .privacy-area {
+            max-width: 700px;
+            margin: 0 auto 20px;
+            padding: 8px 16px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .privacy-area h3 {
+            font-size: 11px;
+            margin-bottom: 4px;
+            color: var(--text-secondary);
+        }
+
+        .privacy-area p {
+            font-size: 9px;
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+        .privacy-area p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #d2d2d7;
+            padding: 16px 20px;
+            text-align: center;
+        }
+
+        .sns-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 8px;
+        }
+
+        .sns-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .sns-link:hover {
+            color: #0071e3;
+        }
+
+        .copyright {
+            font-size: 10px;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>SPLICECH-GALLERY</h1>
+        <p class="subtitle">Ropework Technique & Archives</p>
+    </header>
+
+    <main class="container">
+        
+        <div class="profile-card">
+            <p class="profile-text">
+                当サイト（nrkhayato.com）へお越しいただきありがとうございます。<br>
+                ここでは、YouTubeチャンネル「SPLICECH」で公開しているロープワーク、各種スプライス加工（アイスプライス、バックスプライス等）の技術アーカイブをまとめています。実践で役立つ結び方のコツや補足情報を随時発信していきます。
+            </p>
+            <a href="https://youtube.com/@ch-splice" class="btn-launch" target="_blank">Launch Channel</a>
+        </div>
+
+        <h2>Archives</h2>
+
+        <div class="video-grid">
+            <!-- Video 1 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/tDYx9dssru0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- Video 2 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/0qQw8Z-Yzmg" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- Video 3 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/OZIiaxxTarY" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Ad 1 -->
+            <div class="video-card ad-card">
+                <span class="ad-label">Sponsored</span>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="pub-XXXXXXXXXXXXXXXX" 
+                     data-ad-slot="7596405304"               
+                     data-ad-format="fluid"                  
+                     data-ad-layout-key="-fb+5w+4e-db+86"
+                     data-full-width-responsive="true"></ins>
+                <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+            </div>
+
+            <!-- Video 4 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/wFhnqh2RQcU" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- Video 5 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/vTU_8t-wx9Q" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- Video 6 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/TcQ3er5AcII" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Ad 2 -->
+            <div class="video-card ad-card">
+                <span class="ad-label">Sponsored</span>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="pub-XXXXXXXXXXXXXXXX" 
+                     data-ad-slot="7596405304"               
+                     data-ad-format="fluid"                  
+                     data-ad-layout-key="-fb+5w+4e-db+86"
+                     data-full-width-responsive="true"></ins>
+                <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+            </div>
+
+            <!-- Video 7 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/81HjDVXIGgo" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- Video 8 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/KdkOkECBR58" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- Video 9 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/Ki6uZzjiKZs" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Ad 3 -->
+            <div class="video-card ad-card">
+                <span class="ad-label">Sponsored</span>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="pub-XXXXXXXXXXXXXXXX" 
+                     data-ad-slot="7596405304"               
+                     data-ad-format="fluid"                  
+                     data-ad-layout-key="-fb+5w+4e-db+86"
+                     data-full-width-responsive="true"></ins>
+                <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+            </div>
+
+            <!-- Video 10 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/252YqHfVaUY" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- Video 11 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/5XbgUD-o9aY" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- Video 12 -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/5SxVUJF-0Vk" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Ad 4 -->
+            <div class="video-card ad-card">
+                <span class="ad-label">Sponsored</span>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="pub-XXXXXXXXXXXXXXXX" 
+                     data-ad-slot="7596405304"               
+                     data-ad-format="fluid"                  
+                     data-ad-layout-key="-fb+5w+4e-db+86"
+                     data-full-width-responsive="true"></ins>
+                <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+            </div>
+            
+            <!-- Video 13 (追加) -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/Z2wueeEUypc" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- Video 14 (追加) -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/f_9swSkVgGU" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-ad-area">
+            <span class="ad-label">Amazon Associate</span>
+            <!-- ↓ここを、Amazonアソシエイト管理画面で取得した「専用ナビ」のコード（iframe等）に差し替えてください↓ -->
+           <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">
+    <a href="https://www.amazon.co.jp/shop/nrkhayato" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 30px; background-color: #ff9900; color: #000000; text-decoration: none; font-weight: bold; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-size: 14px; transition: background-color 0.2s;">
+        実際使用している道具をAmazonで見る
+    </a>
+</div>
+            <!-- ↑ここまで↑ -->
+        </div>
+
+        <div class="privacy-area">
+            <h3>プライバシーポリシー</h3>
+            <p>当サイト（nrkhayato.com）では、第三者配信による広告サービス「Google AdSense」を利用しています。広告配信事業者は、ユーザーの興味に応じた商品やサービスの広告を表示するため、当サイトや他サイトへのアクセスに関する情報「Cookie」（氏名、住所、メールアドレス、電話番号は含まれません）を使用することがあります。</p>
+            <p>Cookieを無効にする設定およびGoogleアドセンスに関する詳細は、Googleの「広告 - ポリシーと規約」ページをご覧ください。</p>
+            <p>当サイト（nrkhayato.com）は、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。</p>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="sns-links">
+            <a href="https://youtube.com/@ch-splice" class="sns-link" target="_blank">YouTube</a>
+            <a href="#" class="sns-link">X (Twitter)</a>
+            <a href="#" class="sns-link">Instagram</a>
+        </div>
+        <div class="copyright">&copy; 2026 SPLICECH-GALLERY All Rights Reserved.</div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. YouTube iframe をカスタムサムネイルに変換
+            const videoWrappers = document.querySelectorAll('.video-wrapper');
+            videoWrappers.forEach(wrapper => {
+                const iframe = wrapper.querySelector('iframe');
+                if (!iframe) return;
+
+                const src = iframe.getAttribute('src');
+                if (!src.includes('youtube.com/embed/')) return;
+
+                const videoId = src.split('embed/')[1].split('?')[0];
+                iframe.remove(); // 既存の巨大なiframeを削除
+
+                wrapper.classList.add('custom-facade');
+                wrapper.setAttribute('data-video-id', videoId);
+
+                // サムネイル画像
+                const img = document.createElement('img');
+                img.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                img.className = 'facade-thumb';
+                img.alt = 'Thumbnail';
+
+                // 小さなカスタム再生ボタン
+                const playBtn = document.createElement('div');
+                playBtn.className = 'facade-play';
+
+                // タイトル表示領域
+                const titleBar = document.createElement('div');
+                titleBar.className = 'facade-title-bar';
+                const titleSpan = document.createElement('span');
+                titleSpan.className = 'facade-title';
+                titleSpan.textContent = 'Loading...';
+                titleBar.appendChild(titleSpan);
+
+                wrapper.appendChild(img);
+                wrapper.appendChild(playBtn);
+                wrapper.appendChild(titleBar);
+
+                // タイトルの自動取得
+                fetch(`https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        titleSpan.textContent = data.title ? data.title : 'YouTube Video';
+                    })
+                    .catch(() => {
+                        titleSpan.textContent = 'YouTube Video';
+                    });
+
+                // クリックされたら本物のiframe（自動再生）に差し替え
+                wrapper.addEventListener('click', function() {
+                    if (wrapper.querySelector('iframe')) return; 
+                    const newIframe = document.createElement('iframe');
+                    newIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                    newIframe.setAttribute('allowfullscreen', 'true');
+                    newIframe.setAttribute('allow', 'autoplay; encrypted-media');
+                    newIframe.style.position = 'absolute';
+                    newIframe.style.top = '0';
+                    newIframe.style.left = '0';
+                    newIframe.style.width = '100%';
+                    newIframe.style.height = '100%';
+                    newIframe.style.zIndex = '5';
+                    newIframe.style.border = '0';
+                    wrapper.appendChild(newIframe);
+                });
+            });
+
+            // 2. 登場アニメーション
+            const cards = document.querySelectorAll('.video-card, .bottom-ad-area, .profile-card, .privacy-area, h1, h2, .subtitle');
+            
+            cards.forEach((card, index) => {
+                // ランダムな初期位置（X, Y）と回転角度を生成
+                const randomX = (Math.random() - 0.5) * 200; // -100vw から 100vw
+                const randomY = (Math.random() - 0.5) * 200; // -100vh から 100vh
+                const randomRotate = (Math.random() - 0.5) * 1080; // 大幅な回転（-540度 から 540度）
+                
+                // アニメーション前の初期状態（画面外、透明、小さく、回転している）
+                card.style.transition = 'none';
+                card.style.opacity = '0';
+                card.style.transform = `translate(${randomX}vw, ${randomY}vh) rotate(${randomRotate}deg) scale(0.2)`;
+                card.style.willChange = 'transform, opacity'; // パフォーマンス最適化
+                
+                // DOMの再描画を強制して初期状態を適用
+                card.offsetHeight; 
+                
+                // 順番に定位置へ戻るアニメーション（100msずつズラす）
+                setTimeout(() => {
+                    // 滑らかでダイナミックなイージング（Apple風の心地よい減速）
+                    card.style.transition = 'transform 1.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.8s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translate(0, 0) rotate(0deg) scale(1)';
+                    
+                    // アニメーション完了後、ホバーエフェクト用にインラインのtransitionをリセット
+                    setTimeout(() => {
+                        card.style.transition = '';
+                        card.style.transform = '';
+                        card.style.willChange = 'auto';
+                    }, 1800);
+                }, 100 + (index * 80)); 
+            });
+        });
+    </script>
+</body>
+</html>
