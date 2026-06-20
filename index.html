@@ -5,286 +5,322 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPLICECH-GALLERY | nrkhayato.com</title>
     
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7913939428080109" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-7913939428080109" crossorigin="anonymous"></script>
 
     <style>
-        /* サイト全体の共通デザイン（シックな黒基調） */
+        /* CSS Variables for Apple-like Light Theme */
+        :root {
+            --bg-color: #f5f5f7;
+            --text-primary: #1d1d1f;
+            --text-secondary: #86868b;
+            --card-bg: #ffffff;
+            --border-color: rgba(0, 0, 0, 0.05);
+            --shadow-subtle: 0 4px 24px rgba(0, 0, 0, 0.04);
+            --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.08);
+            --radius-large: 18px;
+            --radius-pill: 980px;
+        }
+
+        /* Base Setup */
         body {
-            background-color: #0b0b0b;
-            color: #ffffff;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
         }
 
-        /* ヘッダー・ナビゲーション領域 */
-        header {
-            width: 100%;
-            max-width: 1200px;
-            padding: 30px 20px;
-            box-sizing: border-box;
-            text-align: center;
-            border-bottom: 1px solid #222;
-        }
-        .site-title {
-            font-size: 2.5rem;
-            font-weight: 900;
-            letter-spacing: 2px;
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: -0.003em;
             margin: 0;
-            color: #ffffff;
-        }
-        .site-subtitle {
-            font-size: 1rem;
-            color: #888;
-            margin: 10px 0 0 0;
         }
 
-        /* メインコンテンツ全体のコンテナ */
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        h2 {
+            font-size: 18px;
+            margin: 20px 0 16px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin: 0 0 8px;
+        }
+
+        /* Layout */
+        .header {
+            padding: 20px 20px 16px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
         .container {
-            width: 100%;
-            max-width: 1200px;
-            padding: 20px;
-            box-sizing: border-box;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        /* LAUNCH CHANNEL ボタンのスタイル */
-        .btn-container {
-            text-align: center;
-            margin: 40px 0;
-        }
-        .launch-btn {
-            display: inline-block;
-            padding: 15px 50px;
-            background-color: #ffcc00;
-            color: #000000;
-            font-weight: bold;
-            font-size: 1.1rem;
-            text-decoration: none;
-            border-radius: 30px;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
-        }
-        .launch-btn:hover {
-            background-color: #e6b800;
-            transform: translateY(-2px);
-        }
-
-        /* セクションタイトル */
-        .section-title {
-            color: #ffcc00;
-            font-size: 1.6rem;
-            border-left: 4px solid #ffcc00;
-            padding-left: 15px;
-            margin: 50px 0 20px 0;
-            letter-spacing: 1px;
-        }
-
-        /* プロフィールセクションのデザイン */
+        /* Profile Card */
         .profile-card {
-            background: #141414;
-            border: 1px solid #222;
+            background: var(--card-bg);
             border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 40px;
+            padding: 12px 24px;
             display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .profile-text {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: #ccc;
-            margin: 0;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            box-shadow: var(--shadow-subtle);
+            max-width: 900px;
+            margin: 0 auto 20px;
+            border: 1px solid var(--border-color);
         }
 
-        /* 動画と広告が同列に並ぶグリッドシステム */
+        @media (max-width: 768px) {
+            .profile-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 16px;
+            }
+        }
+
+        .profile-text {
+            color: var(--text-primary);
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 0;
+            flex: 1;
+            text-align: left;
+        }
+
+        /* Button */
+        .btn-launch {
+            display: inline-block;
+            flex-shrink: 0;
+            background: var(--text-primary);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-launch:hover {
+            transform: scale(1.05);
+            background: #000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Video Grid */
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            align-items: stretch;
-            grid-auto-flow: dense; /* 💡ブラウザが画面幅に合わせて自動で隙間を詰め、みっともない空白を最小化 */
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 1024px) {
+            .video-grid { grid-template-columns: repeat(5, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .video-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         .video-card {
-            background: #141414;
-            border: 1px solid #222;
-            border-radius: 12px;
+            background: var(--card-bg);
+            border-radius: 8px;
             overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            border: 2px solid transparent; /* Prepare for border hover */
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s;
+            position: relative;
+            z-index: 1;
         }
+
         .video-card:hover {
-            transform: translateY(-3px);
+            transform: scale(1.2) translateY(-16px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            border-color: #0071e3; /* Apple Blue highlight */
+            z-index: 10;
         }
 
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9の比率 */
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
             height: 0;
-            background: #000;
+            background: #e8e8ed;
         }
+
         .video-wrapper iframe {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             border: 0;
         }
 
-        /* 広告カードの設定 */
+        /* Ad Cards */
         .video-card.ad-card {
-            background: #0f0f0f;
-            border: 1px dashed #333;
-            padding: 15px;
+            background: transparent;
+            border: 1px dashed #d2d2d7;
+            box-shadow: none;
             justify-content: center;
             align-items: center;
-            min-height: 200px;
+            padding: 8px;
+            min-height: auto;
         }
+        
+        .video-card.ad-card:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
         .ad-label {
-            color: #555;
-            font-size: 10px;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-            display: block;
-            text-align: center;
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
         }
 
-        /* ページ最下部のワイドエリア（Amazonアソシエイト・購入ナビ専用に拡張） */
         .bottom-ad-area {
-            width: 100%;
-            margin: 60px 0 30px 0;
-            background: #141414;
-            border: 2px solid #ffcc00; /* 💡親切なコンテンツ領域としてゴールド枠で差別化 */
-            padding: 30px 25px;
-            box-sizing: border-box;
-            border-radius: 12px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 8px;
             text-align: center;
-        }
-        .amazon-btn {
-            display: inline-block;
-            background: #ffcc00;
-            color: #000000;
-            padding: 15px 60px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 30px;
-            font-size: 1.05rem;
-            margin-top: 15px;
-            transition: background 0.3s, transform 0.2s;
-            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.2);
-        }
-        .amazon-btn:hover {
-            background-color: #e6b800;
-            transform: translateY(-2px);
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
-        /* SNSリンク・フッター領域 */
-        footer {
-            width: 100%;
-            max-width: 1200px;
-            padding: 40px 20px;
-            box-sizing: border-box;
-            border-top: 1px solid #222;
+        /* Privacy Policy */
+        .privacy-area {
+            max-width: 700px;
+            margin: 0 auto 20px;
+            padding: 8px 16px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
             text-align: center;
-            margin-top: 60px;
         }
+
+        .privacy-area h3 {
+            font-size: 11px;
+            margin-bottom: 4px;
+            color: var(--text-secondary);
+        }
+
+        .privacy-area p {
+            font-size: 9px;
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+        .privacy-area p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #d2d2d7;
+            padding: 16px 20px;
+            text-align: center;
+        }
+
         .sns-links {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-        .sns-link {
-            color: #888;
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-        .sns-link:hover {
-            color: #ffcc00;
-        }
-        .copyright {
-            font-size: 0.85rem;
-            color: #555;
+            gap: 24px;
+            margin-bottom: 8px;
         }
 
-        /* プライバシーポリシー領域 */
-        .privacy-policy-area {
-            background: #0f0f0f;
-            border: 1px solid #1a1a1a;
-            border-radius: 8px;
-            padding: 25px;
-            margin-top: 40px;
-            text-align: left;
-            font-size: 0.8rem;
-            color: #666;
-            line-height: 1.7;
+        .sns-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            transition: color 0.3s;
         }
-        .privacy-policy-area h3 {
-            color: #999;
-            font-size: 0.95rem;
-            margin-top: 0;
-            margin-bottom: 15px;
+
+        .sns-link:hover {
+            color: #0071e3;
         }
-        .privacy-policy-area p {
-            margin: 0 0 12px 0;
-        }
-        .privacy-policy-area p:last-child {
-            margin-bottom: 0;
+
+        .copyright {
+            font-size: 10px;
+            color: var(--text-secondary);
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1 class="site-title">SPLICECH-GALLERY</h1>
-        <p class="site-subtitle">Ropework Technique & Archives</p>
+    <header class="header">
+        <h1>SPLICECH-GALLERY</h1>
+        <p class="subtitle">Ropework Technique & Archives</p>
     </header>
 
-    <div class="container">
-
-        <h2 class="section-title">ABOUT</h2>
+    <main class="container">
+        
         <div class="profile-card">
             <p class="profile-text">
                 当サイト（nrkhayato.com）へお越しいただきありがとうございます。<br>
                 ここでは、YouTubeチャンネル「SPLICECH」で公開しているロープワーク、各種スプライス加工（アイスプライス、バックスプライス等）の技術アーカイブをまとめています。実践で役立つ結び方のコツや補足情報を随時発信していきます。
             </p>
+            <a href="https://youtube.com/@ch-splice" class="btn-launch" target="_blank">Launch Channel</a>
         </div>
 
-        <div class="btn-container">
-            <a href="https://youtube.com/@ch-splice" class="launch-btn" target="_blank">LAUNCH CHANNEL</a>
-        </div>
+        <h2>Archives</h2>
 
-        <h2 class="section-title">ROPE WORK ARCHIVES</h2>
         <div class="video-grid">
-            
+            <!-- Video 1 -->
             <div class="video-card">
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/tDYx9dssru0" allowfullscreen></iframe>
                 </div>
             </div>
-
+            <!-- Video 2 -->
             <div class="video-card">
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/0qQw8Z-Yzmg" allowfullscreen></iframe>
                 </div>
             </div>
-
+            <!-- Video 3 -->
             <div class="video-card">
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/OZIiaxxTarY" allowfullscreen></iframe>
                 </div>
             </div>
 
+            <!-- Ad 1 -->
             <div class="video-card ad-card">
-                <span class="ad-label">SPONSORED LINK</span>
+                <span class="ad-label">Sponsored</span>
                 <ins class="adsbygoogle"
                      style="display:block"
-                     data-ad-client="ca-pub-7913939428080109" 
+                     data-ad-client="pub-7913939428080109" 
                      data-ad-slot="7596405304"               
                      data-ad-format="fluid"                  
                      data-ad-layout-key="-fb+5w+4e-db+86"
@@ -292,29 +328,31 @@
                 <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
             </div>
 
+            <!-- Video 4 -->
             <div class="video-card">
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/wFhnqh2RQcU" allowfullscreen></iframe>
                 </div>
             </div>
-
+            <!-- Video 5 -->
             <div class="video-card">
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/vTU_8t-wx9Q" allowfullscreen></iframe>
                 </div>
             </div>
-
+            <!-- Video 6 -->
             <div class="video-card">
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/TcQ3er5AcII" allowfullscreen></iframe>
                 </div>
             </div>
 
+            <!-- Ad 2 -->
             <div class="video-card ad-card">
-                <span class="ad-label">SPONSORED LINK</span>
+                <span class="ad-label">Sponsored</span>
                 <ins class="adsbygoogle"
                      style="display:block"
-                     data-ad-client="ca-pub-7913939428080109" 
+                     data-ad-client="pub-7913939428080109" 
                      data-ad-slot="7596405304"               
                      data-ad-format="fluid"                  
                      data-ad-layout-key="-fb+5w+4e-db+86"
@@ -322,29 +360,31 @@
                 <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
             </div>
 
+            <!-- Video 7 -->
             <div class="video-card">
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/81HjDVXIGgo" allowfullscreen></iframe>
                 </div>
             </div>
-
+            <!-- Video 8 -->
             <div class="video-card">
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/KdkOkECBR58" allowfullscreen></iframe>
                 </div>
             </div>
-
+            <!-- Video 9 -->
             <div class="video-card">
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/Ki6uZzjiKZs" allowfullscreen></iframe>
                 </div>
             </div>
 
+            <!-- Ad 3 -->
             <div class="video-card ad-card">
-                <span class="ad-label">SPONSORED LINK</span>
+                <span class="ad-label">Sponsored</span>
                 <ins class="adsbygoogle"
                      style="display:block"
-                     data-ad-client="ca-pub-7913939428080109" 
+                     data-ad-client="pub-7913939428080109" 
                      data-ad-slot="7596405304"               
                      data-ad-format="fluid"                  
                      data-ad-layout-key="-fb+5w+4e-db+86"
@@ -352,61 +392,70 @@
                 <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
             </div>
 
+            <!-- Video 10 -->
             <div class="video-card">
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/252YqHfVaUY" allowfullscreen></iframe>
                 </div>
             </div>
-
+            <!-- Video 11 -->
             <div class="video-card">
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/5s22EXF6JFA" allowfullscreen></iframe>
                 </div>
             </div>
-
+            <!-- Video 12 -->
             <div class="video-card">
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/5SxVUJF-0Vk" allowfullscreen></iframe>
                 </div>
             </div>
 
+            <!-- Ad 4 -->
             <div class="video-card ad-card">
-                <span class="ad-label">SPONSORED LINK</span>
+                <span class="ad-label">Sponsored</span>
                 <ins class="adsbygoogle"
                      style="display:block"
-                     data-ad-client="ca-pub-7913939428080109" 
+                     data-ad-client="pub-7913939428080109" 
                      data-ad-slot="7596405304"               
                      data-ad-format="fluid"                  
                      data-ad-layout-key="-fb+5w+4e-db+86"
                      data-full-width-responsive="true"></ins>
                 <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
             </div>
-
+            
+            <!-- Video 13 (追加) -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/CEBbksBt69s" allowfullscreen></iframe>
+                </div>
+            </div>
+            <!-- Video 14 (追加) -->
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/9swSkVgGU" allowfullscreen></iframe>
+                </div>
+            </div>
         </div>
 
-        <!-- 💡一番下の大きな広告枠を、AdSenseから「Amazonアソシエイト専用ナビ」に差し替え -->
         <div class="bottom-ad-area">
-            <span style="color: #ffcc00; font-size: 0.8rem; font-weight: bold; letter-spacing: 2px; display: block; margin-bottom: 5px;">TOOLS & ROPE ARCHIVES</span>
-            <h3 style="font-size: 1.3rem; margin: 0 0 12px 0; color: #ffffff;">動画で使用しているロープ・工具の購入ナビ</h3>
-            <p style="font-size: 0.9rem; color: #ccc; line-height: 1.7; margin: 0 0 20px 0;">
-                当ギャラリーの動画で実践しているスプライス加工やロープワークには、動画と同じ仕様のロープや専用フィッド（針）を使うのが上達の近道です。<br>
-                実際に現場で検証・使用している信頼性の高いアイテムをAmazonでチェックできます。
-            </p>
-            <!-- ⚠️「XXXXXX」と「xxxx-hp-22」は、後ほどAmazon公式から取得するURL・ご自身のIDに書き換えてください -->
-            <a href="https://www.amazon.co.jp/shop/nrkhayato" class="amazon-btn" target="_blank">
-                おすすめの加工道具・ロープをAmazonで見る
-            </a>
+            <span class="ad-label">Amazon Associate</span>
+            <!-- ↓ここを、Amazonアソシエイト管理画面で取得した「専用ナビ」のコード（iframe等）に差し替えてください↓ -->
+            <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">
+    <a href="https://www.amazon.co.jp/shop/nrkhayato" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 30px; background-color: #ff9900; color: #000000; text-decoration: none; font-weight: bold; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-size: 14px; transition: background-color 0.2s;">
+        Amazonおすすめ商品（ストアフロント）を見る
+    </a>
+</div>
+            <!-- ↑ここまで↑ -->
         </div>
 
-        <!-- 💡既存のAdSenseポリシー文章を完全保護しつつ、Amazonアソシエイト用の必須規約文言を追加 -->
-        <div class="privacy-policy-area">
+        <div class="privacy-area">
             <h3>プライバシーポリシー</h3>
             <p>当サイト（nrkhayato.com）では、第三者配信による広告サービス「Google AdSense」を利用しています。広告配信事業者は、ユーザーの興味に応じた商品やサービスの広告を表示するため、当サイトや他サイトへのアクセスに関する情報「Cookie」（氏名、住所、メールアドレス、電話番号は含まれません）を使用することがあります。</p>
             <p>Cookieを無効にする設定およびGoogleアドセンスに関する詳細は、Googleの「広告 - ポリシーと規約」ページをご覧ください。</p>
-            <p>また、当サイト（nrkhayato.com）は、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。</p>
         </div>
 
-    </div>
+    </main>
 
     <footer>
         <div class="sns-links">
@@ -417,5 +466,41 @@
         <div class="copyright">&copy; 2026 SPLICECH-GALLERY All Rights Reserved.</div>
     </footer>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cards = document.querySelectorAll('.video-card, .bottom-ad-area, .profile-card, .privacy-area, h1, h2, .subtitle');
+            
+            cards.forEach((card, index) => {
+                // ランダムな初期位置（X, Y）と回転角度を生成
+                const randomX = (Math.random() - 0.5) * 200; // -100vw から 100vw
+                const randomY = (Math.random() - 0.5) * 200; // -100vh から 100vh
+                const randomRotate = (Math.random() - 0.5) * 1080; // 大幅な回転（-540度 から 540度）
+                
+                // アニメーション前の初期状態（画面外、透明、小さく、回転している）
+                card.style.transition = 'none';
+                card.style.opacity = '0';
+                card.style.transform = `translate(${randomX}vw, ${randomY}vh) rotate(${randomRotate}deg) scale(0.2)`;
+                card.style.willChange = 'transform, opacity'; // パフォーマンス最適化
+                
+                // DOMの再描画を強制して初期状態を適用
+                card.offsetHeight; 
+                
+                // 順番に定位置へ戻るアニメーション（100msずつズラす）
+                setTimeout(() => {
+                    // 滑らかでダイナミックなイージング（Apple風の心地よい減速）
+                    card.style.transition = 'transform 1.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.8s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translate(0, 0) rotate(0deg) scale(1)';
+                    
+                    // アニメーション完了後、ホバーエフェクト用にインラインのtransitionをリセット
+                    setTimeout(() => {
+                        card.style.transition = '';
+                        card.style.transform = '';
+                        card.style.willChange = 'auto';
+                    }, 1800);
+                }, 100 + (index * 80)); 
+            });
+        });
+    </script>
 </body>
 </html>
