@@ -3,7 +3,7 @@ name: Deploy Homepage
 on:
   push:
     branches:
-      - main  # ⚠️もしGitHubのメインの枝名が「master」の場合はここを master に書き換えます
+      - main
 
 jobs:
   deploy:
@@ -14,12 +14,11 @@ jobs:
 
       - name: アドセンスIDとスロットIDを本物に自動置き換え
         run: |
-          # index.html の中のダミー文字列を、GitHubの金庫（Secrets）に隠した本物のIDに置き換えます
-          sed -i 's/pub-XXXXXXXXXXXXXXXX/'"${{ secrets.AD_CLIENT_ID }}"'/g' index.html
+          sed -i 's/pub-X000000000000000/'"${{ secrets.AD_CLIENT_ID }}"'/g' index.html
           sed -i 's/9999999999/'"${{ secrets.AD_SLOT_ID }}"'/g' index.html
 
       - name: GitHub Pagesへ公開する準備
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: .
