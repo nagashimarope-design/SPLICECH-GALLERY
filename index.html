@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPLICECH-GALLERY | nrkhayato.com</title>
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-XXXXXXXXXXXXXXXX"
+        crossorigin="anonymous"></script>
 
     <style>
         /* CSS Variables for Apple-like Light Theme */
@@ -35,7 +37,9 @@
         }
 
         /* Typography */
-        h1, h2, h3 {
+        h1,
+        h2,
+        h3 {
             font-weight: 600;
             letter-spacing: -0.003em;
             margin: 0;
@@ -138,11 +142,15 @@
         }
 
         @media (max-width: 1024px) {
-            .video-grid { grid-template-columns: repeat(5, 1fr); }
+            .video-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
         }
 
         @media (max-width: 600px) {
-            .video-grid { grid-template-columns: repeat(2, 1fr); }
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .video-card {
@@ -151,7 +159,8 @@
             overflow: hidden;
             box-shadow: var(--shadow-subtle);
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
-            border: 2px solid transparent; /* Prepare for border hover */
+            border: 2px solid transparent;
+            /* Prepare for border hover */
             display: flex;
             flex-direction: column;
             position: relative;
@@ -161,20 +170,25 @@
         .video-card:hover {
             transform: scale(1.2) translateY(-16px);
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-            border-color: #0071e3; /* Apple Blue highlight */
+            border-color: #0071e3;
+            /* Apple Blue highlight */
             z-index: 10;
         }
 
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
             height: 0;
             background: #e8e8ed;
         }
 
         .video-wrapper iframe {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             border: 0;
         }
 
@@ -183,17 +197,21 @@
             cursor: pointer;
             position: relative;
         }
+
         .facade-thumb {
             width: 100%;
             height: 100%;
             object-fit: cover;
             position: absolute;
-            top: 0; left: 0;
+            top: 0;
+            left: 0;
             z-index: 1;
         }
+
         .facade-play {
             position: absolute;
-            top: 50%; left: 50%;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
             width: 32px;
             height: 32px;
@@ -206,6 +224,7 @@
             backdrop-filter: blur(4px);
             transition: background-color 0.3s, transform 0.3s;
         }
+
         .facade-play::after {
             content: '';
             display: block;
@@ -216,26 +235,31 @@
             border-color: transparent transparent transparent #fff;
             margin-left: 3px;
         }
+
         .video-card:hover .facade-play {
             background-color: #0071e3;
             transform: translate(-50%, -50%) scale(1.1);
         }
+
         .facade-title-bar {
             position: absolute;
-            bottom: 0; left: 0; width: 100%;
+            bottom: 0;
+            left: 0;
+            width: 100%;
             padding: 24px 8px 6px;
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 100%);
             z-index: 2;
             box-sizing: border-box;
             display: flex;
             align-items: flex-end;
         }
+
         .facade-title {
             color: #fff;
             font-size: 10px;
             font-weight: 500;
             line-height: 1.3;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -253,7 +277,7 @@
             padding: 8px;
             min-height: auto;
         }
-        
+
         .video-card.ad-card:hover {
             transform: none;
             box-shadow: none;
@@ -305,6 +329,7 @@
             margin-bottom: 4px;
             line-height: 1.4;
         }
+
         .privacy-area p:last-child {
             margin-bottom: 0;
         }
@@ -339,9 +364,112 @@
             font-size: 10px;
             color: var(--text-secondary);
         }
+
+        /* Opening Loading Screen Styles */
+        #opening-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 1.0s cubic-bezier(0.25, 1, 0.5, 1), visibility 1.0s;
+            overflow: hidden;
+        }
+
+        #opening-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        #opening-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: #000;
+            transition: filter 1.0s ease, transform 1.0s ease;
+        }
+
+        #opening-video.blur-out {
+            filter: blur(20px);
+            transform: scale(1.05);
+        }
+
+        /* Large & Elegant Skip Button */
+        .skip-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            padding: 10px 24px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            font-weight: 600;
+            font-family: inherit;
+            border-radius: 980px;
+            cursor: pointer;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: 100000;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .skip-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.6);
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Subtle Video Progress Bar at the bottom */
+        .progress-bar-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.15);
+            z-index: 100001;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #0071e3; /* Apple Blue accent progress */
+            transition: width 0.1s linear;
+        }
+
+        /* Prevent scrolling when opening is active */
+        body.loading-active {
+            overflow: hidden !important;
+            height: 100vh;
+        }
     </style>
 </head>
-<body>
+
+<body class="loading-active">
+
+    <!-- Opening Loading Screen -->
+    <div id="opening-screen">
+        <video id="opening-video" src="20260621.mp4" muted playsinline></video>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <button class="skip-btn" id="skip-btn">Skip ❯</button>
+    </div>
 
     <header class="header">
         <h1>SPLICECH-GALLERY</h1>
@@ -349,7 +477,7 @@
     </header>
 
     <main class="container">
-        
+
         <div class="profile-card">
             <p class="profile-text">
                 当サイト（nrkhayato.com）へお越しいただきありがとうございます。<br>
@@ -383,13 +511,9 @@
             <!-- Ad 1 -->
             <div class="video-card ad-card">
                 <span class="ad-label">Sponsored</span>
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="pub-XXXXXXXXXXXXXXXX" 
-                     data-ad-slot="9999999999"               
-                     data-ad-format="fluid"                  
-                     data-ad-layout-key="-fb+5w+4e-db+86"
-                     data-full-width-responsive="true"></ins>
+                <ins class="adsbygoogle" style="display:block" data-ad-client="pub-XXXXXXXXXXXXXXXX"
+                    data-ad-slot="9999999999" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86"
+                    data-full-width-responsive="true"></ins>
                 <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
             </div>
 
@@ -415,13 +539,9 @@
             <!-- Ad 2 -->
             <div class="video-card ad-card">
                 <span class="ad-label">Sponsored</span>
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="pub-XXXXXXXXXXXXXXXX" 
-                     data-ad-slot="9999999999"               
-                     data-ad-format="fluid"                  
-                     data-ad-layout-key="-fb+5w+4e-db+86"
-                     data-full-width-responsive="true"></ins>
+                <ins class="adsbygoogle" style="display:block" data-ad-client="pub-XXXXXXXXXXXXXXXX"
+                    data-ad-slot="9999999999" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86"
+                    data-full-width-responsive="true"></ins>
                 <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
             </div>
 
@@ -447,13 +567,9 @@
             <!-- Ad 3 -->
             <div class="video-card ad-card">
                 <span class="ad-label">Sponsored</span>
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="pub-XXXXXXXXXXXXXXXX" 
-                     data-ad-slot="9999999999"               
-                     data-ad-format="fluid"                  
-                     data-ad-layout-key="-fb+5w+4e-db+86"
-                     data-full-width-responsive="true"></ins>
+                <ins class="adsbygoogle" style="display:block" data-ad-client="pub-XXXXXXXXXXXXXXXX"
+                    data-ad-slot="9999999999" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86"
+                    data-full-width-responsive="true"></ins>
                 <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
             </div>
 
@@ -479,16 +595,12 @@
             <!-- Ad 4 -->
             <div class="video-card ad-card">
                 <span class="ad-label">Sponsored</span>
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="pub-XXXXXXXXXXXXXXXX" 
-                     data-ad-slot="9999999999"               
-                     data-ad-format="fluid"                  
-                     data-ad-layout-key="-fb+5w+4e-db+86"
-                     data-full-width-responsive="true"></ins>
+                <ins class="adsbygoogle" style="display:block" data-ad-client="pub-XXXXXXXXXXXXXXXX"
+                    data-ad-slot="9999999999" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86"
+                    data-full-width-responsive="true"></ins>
                 <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
             </div>
-            
+
             <!-- Video 13 (追加) -->
             <div class="video-card">
                 <div class="video-wrapper">
@@ -506,19 +618,23 @@
         <div class="bottom-ad-area">
             <span class="ad-label">Amazon Associate</span>
             <!-- ↓ここを、Amazonアソシエイト管理画面で取得した「専用ナビ」のコード（iframe等）に差し替えてください↓ -->
-           <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">
-    <a href="https://www.amazon.co.jp/shop/nrkhayato" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 30px; background-color: #ff9900; color: #000000; text-decoration: none; font-weight: bold; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-size: 14px; transition: background-color 0.2s;">
-        実際使用している道具をAmazonで見る
-    </a>
-</div>
+            <div style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">
+                <a href="https://www.amazon.co.jp/shop/nrkhayato" target="_blank" rel="noopener"
+                    style="display: inline-block; padding: 12px 30px; background-color: #ff9900; color: #000000; text-decoration: none; font-weight: bold; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-size: 14px; transition: background-color 0.2s;">
+                    実際使用している道具をAmazonで見る
+                </a>
+            </div>
             <!-- ↑ここまで↑ -->
         </div>
 
         <div class="privacy-area">
             <h3>プライバシーポリシー</h3>
-            <p>当サイト（nrkhayato.com）では、第三者配信による広告サービス「Google AdSense」を利用しています。広告配信事業者は、ユーザーの興味に応じた商品やサービスの広告を表示するため、当サイトや他サイトへのアクセスに関する情報「Cookie」（氏名、住所、メールアドレス、電話番号は含まれません）を使用することがあります。</p>
+            <p>当サイト（nrkhayato.com）では、第三者配信による広告サービス「Google
+                AdSense」を利用しています。広告配信事業者は、ユーザーの興味に応じた商品やサービスの広告を表示するため、当サイトや他サイトへのアクセスに関する情報「Cookie」（氏名、住所、メールアドレス、電話番号は含まれません）を使用することがあります。
+            </p>
             <p>Cookieを無効にする設定およびGoogleアドセンスに関する詳細は、Googleの「広告 - ポリシーと規約」ページをご覧ください。</p>
-            <p>当サイト（nrkhayato.com）は、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。</p>
+            <p>当サイト（nrkhayato.com）は、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。
+            </p>
         </div>
 
     </main>
@@ -582,8 +698,8 @@
                     });
 
                 // クリックされたら本物のiframe（自動再生）に差し替え
-                wrapper.addEventListener('click', function() {
-                    if (wrapper.querySelector('iframe')) return; 
+                wrapper.addEventListener('click', function () {
+                    if (wrapper.querySelector('iframe')) return;
                     const newIframe = document.createElement('iframe');
                     newIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
                     newIframe.setAttribute('allowfullscreen', 'true');
@@ -599,40 +715,102 @@
                 });
             });
 
-            // 2. 登場アニメーション
+            // 2. 登場アニメーションの準備
             const cards = document.querySelectorAll('.video-card, .bottom-ad-area, .profile-card, .privacy-area, h1, h2, .subtitle');
             
-            cards.forEach((card, index) => {
+            cards.forEach((card) => {
                 // ランダムな初期位置（X, Y）と回転角度を生成
-                const randomX = (Math.random() - 0.5) * 200; // -100vw から 100vw
-                const randomY = (Math.random() - 0.5) * 200; // -100vh から 100vh
-                const randomRotate = (Math.random() - 0.5) * 1080; // 大幅な回転（-540度 から 540度）
+                const randomX = (Math.random() - 0.5) * 200;
+                const randomY = (Math.random() - 0.5) * 200;
+                const randomRotate = (Math.random() - 0.5) * 1080;
                 
                 // アニメーション前の初期状態（画面外、透明、小さく、回転している）
                 card.style.transition = 'none';
                 card.style.opacity = '0';
                 card.style.transform = `translate(${randomX}vw, ${randomY}vh) rotate(${randomRotate}deg) scale(0.2)`;
-                card.style.willChange = 'transform, opacity'; // パフォーマンス最適化
-                
-                // DOMの再描画を強制して初期状態を適用
-                card.offsetHeight; 
-                
-                // 順番に定位置へ戻るアニメーション（100msずつズラす）
-                setTimeout(() => {
-                    // 滑らかでダイナミックなイージング（Apple風の心地よい減速）
-                    card.style.transition = 'transform 1.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.8s ease-out';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translate(0, 0) rotate(0deg) scale(1)';
-                    
-                    // アニメーション完了後、ホバーエフェクト用にインラインのtransitionをリセット
+                card.style.willChange = 'transform, opacity';
+            });
+
+            // 登場アニメーションを実行する関数
+            function playEntranceAnimation() {
+                cards.forEach((card, index) => {
+                    card.offsetHeight; // DOM再描画
                     setTimeout(() => {
-                        card.style.transition = '';
-                        card.style.transform = '';
-                        card.style.willChange = 'auto';
-                    }, 1800);
-                }, 100 + (index * 80)); 
+                        // 滑らかでダイナミックなイージング（Apple風の心地よい減速）
+                        card.style.transition = 'transform 1.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.8s ease-out';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translate(0, 0) rotate(0deg) scale(1)';
+                        
+                        // アニメーション完了後、ホバーエフェクト用にインラインのtransitionをリセット
+                        setTimeout(() => {
+                            card.style.transition = '';
+                            card.style.transform = '';
+                            card.style.willChange = 'auto';
+                        }, 1800);
+                    }, index * 80); 
+                });
+            }
+
+            // 3. オープニング画面の制御
+            const openingScreen = document.getElementById('opening-screen');
+            const openingVideo = document.getElementById('opening-video');
+            const skipBtn = document.getElementById('skip-btn');
+            const progressBar = document.getElementById('progress-bar');
+            let isTransitioned = false;
+
+            function transitionToHomepage() {
+                if (isTransitioned) return;
+                isTransitioned = true;
+
+                // ビデオをぼかす
+                openingVideo.classList.add('blur-out');
+
+                // オープニング画面をフェードアウト
+                openingScreen.classList.add('fade-out');
+                
+                // スクロール制限を解除
+                document.body.classList.remove('loading-active');
+
+                // 少し時間を置いてからビデオを完全に停止
+                setTimeout(() => {
+                    openingVideo.pause();
+                }, 500);
+
+                // フェードアウトと同時にホームページの登場アニメーションを開始
+                setTimeout(() => {
+                    playEntranceAnimation();
+                }, 200);
+
+                // アニメーション完了後にDOMから削除
+                openingScreen.addEventListener('transitionend', () => {
+                    openingScreen.remove();
+                }, { once: true });
+            }
+
+            // プログレスバーの更新
+            openingVideo.addEventListener('timeupdate', () => {
+                if (openingVideo.duration) {
+                    const progress = (openingVideo.currentTime / openingVideo.duration) * 100;
+                    progressBar.style.width = `${progress}%`;
+                }
+            });
+
+            // 動画再生完了時の処理
+            openingVideo.addEventListener('ended', transitionToHomepage);
+
+            // Skipボタンクリック時の処理
+            skipBtn.addEventListener('click', transitionToHomepage);
+
+            // 自動再生の開始（ミュート再生なのでポリシー上再生可能）
+            openingVideo.play().catch(error => {
+                console.log("Autoplay failed or was prevented:", error);
+                // 自動再生が拒否された場合のフォールバック: 3秒後に自動遷移
+                setTimeout(() => {
+                    transitionToHomepage();
+                }, 3000);
             });
         });
     </script>
 </body>
+
 </html>
