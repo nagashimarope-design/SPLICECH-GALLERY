@@ -806,13 +806,69 @@
 
             // コメント（弾幕）のリスト
             const commentsList = [
+                // 挨拶・基本
                 "スプライスchへようこそ！",
                 "いらっしゃいませ！",
                 "ｷﾀ━━━━(ﾟ∀ﾟ)━━━━!!",
-                "ロープ加工教えて〜",
-                "がんばれ〜",
-                "チャンネル登録よろしくお願いします〜",
-                "888888888888"
+                "きたああああああああ",
+                "待ってた！！",
+                "うぽつ",
+                "おつ",
+                "8888888888888888",
+                "パチパチパチパチ",
+                "わくわく",
+                
+                // ニコニコ定番スラング
+                "ｗｗｗｗｗｗｗｗｗｗｗ",
+                "草",
+                "大草原",
+                "これは伸びる",
+                "有益すぎる動画",
+                "神回確定",
+                "プロの犯行",
+                "野生のプロ",
+                "職人降臨",
+                "謎の技術",
+                "手元どうなってんのこれ",
+                "理解が追いつかない",
+                "おいおい神かよ",
+                "※特殊な訓練を受けています",
+                "絶対に真似できないシリーズ",
+                "神業",
+                "鳥肌立った",
+                
+                // スプライス・ロープワーク特化
+                "ロープワーク助かる",
+                "スプライス美しい...",
+                "この手さばきよ",
+                "指使いがプロすぎる",
+                "ずっと見てられるなこれ",
+                "キャンプでドヤ顔できるやつ",
+                "実用性高すぎて草",
+                "摩擦力ってすげえ",
+                "結び目の芸術",
+                "脳がバグるｗｗ",
+                "手さばきが美しすぎる",
+                "スプライス職人",
+                "超絶技巧",
+                "見てるだけで気持ちいい",
+                
+                // 最近の流行・ミーム・ネットスラング風
+                "マジで有益",
+                "有益の化身",
+                "脳の洗濯始まった",
+                "脳汁ドバドバ",
+                "すき",
+                "ここすき",
+                "これすき",
+                "てぇてぇ",
+                "脳がバグる",
+                "えぐいてぇぇ",
+                "チートやん",
+                "異次元すぎる",
+                "見てるだけで満足するやつ",
+                "今日イチ感動した",
+                "これ本当に人間技？"
             ];
 
             // 弾幕コメントを1個生成して流す関数
@@ -824,18 +880,22 @@
                 comment.className = 'danmaku-comment';
                 comment.textContent = text;
 
-                // 画面を10トラックに分割し、ランダムな縦位置に配置
-                const tracks = 10;
+                // 画面を12トラックに分割し、ランダムな縦位置に配置（重なり防止と広域利用）
+                const tracks = 12;
                 const trackIndex = Math.floor(Math.random() * tracks);
-                const topPercentage = 10 + (trackIndex * 7); // 10%から73%の間
+                const topPercentage = 5 + (trackIndex * 7.5); // 5%から87.5%の間
                 comment.style.top = `${topPercentage}%`;
 
-                // ランダムなフォントサイズ（20px 〜 36px）
-                const fontSize = Math.floor(Math.random() * (36 - 20 + 1)) + 20;
+                // ランダムなフォントサイズ（18px 〜 36px）
+                const fontSize = Math.floor(Math.random() * (36 - 18 + 1)) + 18;
                 comment.style.fontSize = `${fontSize}px`;
 
-                // ランダムなアニメーション秒数（4秒 〜 7秒）
-                const duration = (Math.random() * 3 + 4).toFixed(2);
+                // ランダムな色分け（ニコニコ風：白多め、アクセントカラー数色）
+                const colors = ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffff00', '#00ffff', '#00ff00', '#ff66cc', '#ff3333'];
+                comment.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+                // ランダムなアニメーション秒数（3.5秒 〜 6.5秒で流れる速度に緩急をつける）
+                const duration = (Math.random() * 3 + 3.5).toFixed(2);
                 comment.style.animation = `danmaku-move ${duration}s linear forwards`;
 
                 commentOverlay.appendChild(comment);
@@ -850,10 +910,16 @@
             function startDanmakuLoop() {
                 if (isTransitioned) return;
 
-                spawnDanmaku();
+                // 確率で複数同時に流す（弾幕感・ライブ感アップ）
+                const count = Math.random() < 0.35 ? (Math.random() < 0.15 ? 3 : 2) : 1;
+                for (let i = 0; i < count; i++) {
+                    setTimeout(() => {
+                        spawnDanmaku();
+                    }, i * 120);
+                }
 
-                // 次の弾幕流下間隔をランダム（400ms 〜 1200ms）で設定
-                const nextDelay = Math.random() * 800 + 400;
+                // 次の弾幕流下間隔を短く（80ms 〜 300ms）して賑やかに
+                const nextDelay = Math.random() * 220 + 80;
                 danmakuTimeout = setTimeout(startDanmakuLoop, nextDelay);
             }
 
