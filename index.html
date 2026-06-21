@@ -338,6 +338,16 @@
             margin-bottom: 0;
         }
 
+        .privacy-area a {
+            color: #0071e3;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+
+        .privacy-area a:hover {
+            color: #0056b3;
+        }
+
         /* Footer */
         footer {
             border-top: 1px solid #d2d2d7;
@@ -349,19 +359,27 @@
             display: flex;
             justify-content: center;
             gap: 24px;
-            margin-bottom: 8px;
+            margin-bottom: 16px;
         }
 
         .footer-link {
-            color: var(--text-secondary);
+            display: inline-block;
+            color: #ff9900;
             text-decoration: none;
-            font-size: 12px;
-            font-weight: 500;
-            transition: color 0.3s;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 12px 24px;
+            border: 2px solid #ff9900;
+            border-radius: var(--radius-pill);
+            background-color: transparent;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         .footer-link:hover {
-            color: #0071e3;
+            background-color: #ff9900;
+            color: #ffffff;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.3);
         }
 
 
@@ -671,14 +689,11 @@
 
         <div class="privacy-area">
             <h3>プライバシーポリシー</h3>
-            <p>当サイト（nrkhayato.com）では、第三者配信による広告サービス「Google
-                AdSense」を利用しています。広告配信事業者は、ユーザーの興味に応じた商品やサービスの広告を表示するため、当サイトや他サイトへのアクセスに関する情報「Cookie」（氏名、住所、メールアドレス、電話番号は含まれません）を使用することがあります。
-            </p>
-            <p>Cookieを無効にする設定およびGoogleアドセンスに関する詳細は、Googleの「広告 - ポリシーと規約」ページをご覧ください。</p>
-            <p>当サイト（nrkhayato.com）は、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。
-            </p>
+            <p>当サイト（nrkhayato.com）では、第三者配信による広告サービス「Google AdSense」を利用しています。広告配信事業者は、ユーザーの興味に応じた商品やサービスの広告を表示するため、当サイトや他サイトへのアクセスに関する情報「Cookie」（氏名、住所、メールアドレス、電話番号は含まれません）を使用することがあります。</p>
+            <p>ユーザーは、Googleの<a href="https://adssettings.google.com/" target="_blank" rel="noopener">広告設定</a>でパーソナライズ広告を無効にできます。</p>
+            <p>Amazonの共同プロモーションプログラムとして、nrkhayato.comは適格販売により収入を得ています。</p>
             <h3>免責事項</h3>
-            <p>当ブログは著作権や肖像権の侵害を目的としたものではありません。著作権や肖像権に関して問題がございましたら、お問い合わせよりご連絡ください。迅速に対応いたします。</p>
+            <p>当ブログは著作権や肖像権の侵害を目的としたものではありません。著作権や肖像権に関して問題がございましたら、<a href="https://docs.google.com/forms/d/e/1FAIpQLSc8y6OOm3cMQ4WQRaOqlH1kGLHslPmaXHdy7afWBFV6Ung1MQ/viewform?usp=publish-editor" target="_blank" rel="noopener">お問い合わせ</a>よりご連絡ください。迅速に対応いたします。</p>
             <p>また、当ブログのコンテンツ・情報につきまして、可能な限り正確な情報を掲載するよう努めておりますが、必ずしもその正確性や安全性を保証するものではありません。当ブログに掲載された内容、およびリンクやバナーなどによって他のサイトに移動された場合、移動先サイトで提供される情報、サービス等について一切の責任を負いかねますのでご了承ください。</p>
         </div>
 
@@ -689,7 +704,7 @@
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSc8y6OOm3cMQ4WQRaOqlH1kGLHslPmaXHdy7afWBFV6Ung1MQ/viewform?usp=publish-editor"
                 class="footer-link" target="_blank" rel="noopener">お問い合わせ</a>
         </div>
-        <div class="copyright">&copy; 2026 SPLICECH-GALLERY All Rights Reserved.</div>
+        <div class="copyright">&copy; 2026 nrkhayato.com All Rights Reserved.</div>
     </footer>
 
     <script>
