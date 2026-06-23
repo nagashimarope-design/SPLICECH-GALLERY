@@ -14,8 +14,8 @@ jobs:
 
       - name: アドセンスIDとスロットIDを本物に自動置き換え
         run: |
-          sed -i 's/pub-XXXXXXXXXXXXXXXX/'"${{ secrets.AD_CLIENT_ID }}"'/g' index.html
-          sed -i 's/9999999999/'"${{ secrets.AD_SLOT_ID }}"'/g' index.html
+          sed -i 's/pub-XXXXXXXXXXXXXXXX/'"${{ secrets.AD_CLIENT_ID }}"'/g' *.html
+          sed -i 's/9999999999/'"${{ secrets.AD_SLOT_ID }}"'/g' *.html
 
       - name: GitHub Pagesへ公開する準備
         uses: peaceiris/actions-gh-pages@v4
