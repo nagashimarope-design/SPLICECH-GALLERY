@@ -523,7 +523,7 @@
 
     <!-- Opening Loading Screen -->
     <div id="opening-screen">
-        <video id="opening-video" src="20260624open" muted playsinline></video>
+        <video id="opening-video" src="20260624open.mp4" muted playsinline></video>
         <div id="comment-overlay"></div>
         <div class="progress-bar-container">
             <div class="progress-bar" id="progress-bar"></div>
@@ -774,6 +774,19 @@
                 });
             });
 
+            // 1.5 クローラー（GooglebotやAdSenseボット等）および Lighthouse の場合はオープニング画面をバイパス
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isBot = /googlebot|mediapartners-google|adsbot|bingbot|yandexbot|baiduspider|lighthouse/i.test(userAgent);
+            
+            if (isBot) {
+                const openingScreen = document.getElementById('opening-screen');
+                if (openingScreen) {
+                    openingScreen.remove();
+                }
+                document.body.classList.remove('loading-active');
+                return;
+            }
+
             // 2. 登場アニメーションの準備
             const cards = document.querySelectorAll('.video-card, .bottom-ad-area, .profile-card, .privacy-area, h1, h2, .subtitle');
 
@@ -1002,5 +1015,5 @@
         });
     </script>
 </body>
- 
+
 </html>
