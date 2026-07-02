@@ -400,6 +400,36 @@
             transform: scale(1.05);
         }
 
+        /* Prominent Countdown Timer */
+        .countdown-timer {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            padding: 12px 24px;
+            background: rgba(0, 0, 0, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 980px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 100000;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            pointer-events: none;
+        }
+
+        .countdown-number {
+            font-size: 26px;
+            font-weight: 700;
+            color: #ff9900;
+            line-height: 1;
+        }
+
         /* Large & Elegant Skip Button */
         .skip-btn {
             position: absolute;
@@ -648,6 +678,9 @@
 
     <!-- Opening Loading Screen -->
     <div id="opening-screen">
+        <div id="countdown-timer" class="countdown-timer">
+            あと <span id="countdown-number" class="countdown-number">-</span> 秒
+        </div>
         <video id="opening-video" src="20260624open.mp4" muted playsinline></video>
         <div id="comment-overlay"></div>
         <div class="progress-bar-container">
@@ -1196,11 +1229,27 @@
                 }, { once: true });
             }
 
-            // プログレスバーの更新
+            // カウントダウンとプログレスバーの更新
+            const countdownNumber = document.getElementById('countdown-number');
+
+            openingVideo.addEventListener('loadedmetadata', () => {
+                if (openingVideo.duration) {
+                    const remaining = Math.ceil(openingVideo.duration - openingVideo.currentTime);
+                    if (countdownNumber) {
+                        countdownNumber.textContent = remaining >= 0 ? remaining : 0;
+                    }
+                }
+            });
+
             openingVideo.addEventListener('timeupdate', () => {
                 if (openingVideo.duration) {
                     const progress = (openingVideo.currentTime / openingVideo.duration) * 100;
                     progressBar.style.width = `${progress}%`;
+
+                    const remaining = Math.ceil(openingVideo.duration - openingVideo.currentTime);
+                    if (countdownNumber) {
+                        countdownNumber.textContent = remaining >= 0 ? remaining : 0;
+                    }
                 }
             });
 
@@ -1219,7 +1268,22 @@
             openingVideo.play().catch(error => {
                 console.log("Autoplay failed or was prevented:", error);
                 // 自動再生が拒否された場合のフォールバック: 3秒後に自動遷移
+                let fallbackSeconds = 3;
+                if (countdownNumber) {
+                    countdownNumber.textContent = fallbackSeconds;
+                }
+                const fallbackInterval = setInterval(() => {
+                    fallbackSeconds--;
+                    if (countdownNumber) {
+                        countdownNumber.textContent = fallbackSeconds >= 0 ? fallbackSeconds : 0;
+                    }
+                    if (fallbackSeconds <= 0) {
+                        clearInterval(fallbackInterval);
+                    }
+                }, 1000);
+
                 setTimeout(() => {
+                    clearInterval(fallbackInterval);
                     transitionToHomepage();
                 }, 3000);
             });
