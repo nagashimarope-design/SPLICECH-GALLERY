@@ -492,6 +492,155 @@
                 transform: translate3d(-100%, 0, 0);
             }
         }
+
+        /* Operator Profile Card */
+        .about-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: var(--shadow-subtle);
+            max-width: 900px;
+            margin: 0 auto 24px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+            box-sizing: border-box;
+        }
+
+        .about-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+        }
+
+        .about-avatar-container {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: rgba(0, 113, 227, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0071e3;
+            flex-shrink: 0;
+        }
+
+        .about-avatar-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .about-badge {
+            font-size: 10px;
+            font-weight: 700;
+            color: #0071e3;
+            background: rgba(0, 113, 227, 0.08);
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            margin-bottom: 6px;
+        }
+
+        .about-main-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+            color: var(--text-primary);
+            text-align: left;
+        }
+
+        .about-content {
+            font-size: 13.5px;
+            line-height: 1.65;
+            color: var(--text-primary);
+        }
+
+        .about-content p {
+            margin-bottom: 16px;
+            font-size: 13.5px;
+            color: var(--text-primary);
+            line-height: 1.65;
+        }
+
+        .about-section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 28px 0 12px;
+            padding-left: 10px;
+            border-left: 3px solid #0071e3;
+            text-align: left;
+        }
+
+        .about-features {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0 20px;
+        }
+
+        .about-features li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .about-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            color: #0071e3;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .about-feature-title {
+            font-weight: 700;
+            color: var(--text-primary);
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .about-feature-desc {
+            color: var(--text-secondary);
+        }
+
+        .about-closing {
+            background: #f5f5f7;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-top: 24px;
+            border-left: 3px solid #ff9900;
+        }
+
+        .about-content a {
+            color: #0071e3;
+            text-decoration: underline;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .about-content a:hover {
+            color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .about-card {
+                padding: 20px;
+            }
+            .about-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .about-main-title {
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 
@@ -700,6 +849,69 @@
             <!-- ↑ここまで↑ -->
         </div>
 
+        <div class="about-card">
+            <div class="about-header">
+                <div class="about-avatar-container">
+                    <svg class="about-avatar-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="about-badge">運営者プロフィール</span>
+                    <h2 class="about-main-title">SPLICECH-GALLERY へようこそ</h2>
+                </div>
+            </div>
+            <div class="about-content">
+                <p>
+                    当サイト（nrkhayato.com）を運営しております、SPLICECH（スプライスch）運営のHAYATOと申します。
+                </p>
+                <p>
+                    私は長年にわたり、合成繊維ロープの手加工（スプライス加工）や、現場で生きるロープワークの技術向上に向き合ってきました。船舶の係留ロープや産業用ロープに至るまで、ロープは一歩間違えれば重大な事故に直結する重要なインフラです。だからこそ、確実な強度と美しい仕上がり（フィニッシュ）を両立させる手加工技術には、一切の妥協が許されません。
+                </p>
+
+                <h3 class="about-section-title">YouTubeチャンネル「SPLICECH」と本ギャラリーの役割</h3>
+                <p>
+                    動画配信チャンネル「SPLICECH」では、3つ打ちロープの基本から、クロスロープ（エイトロープ）のバックスプライス、さらには高強度な12つ打ちスーパー繊維ロープのアイスプライス加工、擦れ止めやアイの補強に不可欠なシージング（seizing）などの手順をテロップ付きで分かりやすく公開しています。
+                </p>
+                <p>
+                    しかし、動画だけでは「なぜその位置で口入れをするのか」「縒り（より）の特性に合わせた力加減はどうあるべきか」といった、手の感覚や技術的な背景をすべて伝えきることは困難です。<br>
+                    本サイトは、動画のアーカイブとしてだけでなく、プロの現場で培った「実践的な知恵」や「道具（ライトスパイキ等）のリアルな使用感」、さらには「波刃包丁研ぎ」といった日常の刃物メンテナンスに至るまで、技術をより深く体系的に学びたい方のための「デジタル教科書」として運営を目指しています。
+                </p>
+
+                <h3 class="about-section-title">確かな「一次情報」と技術へのこだわり</h3>
+                <p>
+                    ネット上には数多くのロープワーク情報が存在しますが、当サイトで発信する内容はすべて、私自身が実際に手を動かし、現場での耐久性や実用性を検証した「一次情報」のみです。
+                </p>
+                
+                <ul class="about-features">
+                    <li>
+                        <span class="about-feature-title">構造に合わせた最適な加工：</span>
+                        <span class="about-feature-desc">3打、8打、12打、ダブルブレードなど、ロープごとの構造的特性を考慮した正確な手順の提示</span>
+                    </li>
+                    <li>
+                        <span class="about-feature-title">プロツールの実践レビュー：</span>
+                        <span class="about-feature-desc">道具選びで迷う方へ向けた、実務に耐えうる頑丈な道具の紹介</span>
+                    </li>
+                    <li>
+                        <span class="about-feature-title">安全性への意識向上：</span>
+                        <span class="about-feature-desc">ただ結ぶ・繋ぐだけでなく、緩まない・解けないための本質的なコツの解説</span>
+                    </li>
+                </ul>
+
+                <h3 class="about-section-title">広告の掲載と使用道具について</h3>
+                <p>
+                    当サイトでは、今後の加工検証、および良質なアーカイブを無料で提供し続けるための運営費として、Google AdSenseによる広告配信や、Amazonアソシエイト等のアフィリエイトプログラムを利用しています。
+                </p>
+                <p>
+                    動画内で私が実際に使用しているASANO製のライトスパイキをはじめとするプロツールや、検証で太鼓判を押した道具類については、すぐ上の<a href="https://www.amazon.co.jp/shop/nrkhayato" target="_blank" rel="noopener"><strong>【実際使用している道具をAmazonで見る】</strong></a>のリンク先にまとめています。道具選びで迷われた際は、ぜひ実務の参考にしてください。
+                </p>
+
+                <div class="about-closing">
+                    初心者の方の趣味のロープワークから、現場でより確実な作業を求められるプロフェッショナルの方まで、皆様の安全で確実なロープワークライフの一助となれば幸いです。もし動画や記事内容についてご質問がございましたら、お気軽に<a href="https://youtube.com/@ch-splice" target="_blank" rel="noopener"><strong>【youtubeコメント】</strong></a>や<a href="https://docs.google.com/forms/d/e/1FAIpQLSc8y6OOm3cMQ4WQRaOqlH1kGLHslPmaXHdy7afWBFV6Ung1MQ/viewform?usp=publish-editor" target="_blank" rel="noopener"><strong>【お問い合わせ】</strong></a>よりご連絡ください。
+                </div>
+            </div>
+        </div>
+
         <div class="privacy-area">
             <h3>プライバシーポリシー</h3>
             <p>当サイト（nrkhayato.com）では、第三者配信による広告サービス「Google AdSense」を利用しています。広告配信事業者は、ユーザーの興味に応じた商品やサービスの広告を表示するため、当サイトや他サイトへのアクセスに関する情報「Cookie」（氏名、住所、メールアドレス、電話番号は含まれません）を使用することがあります。</p>
@@ -787,7 +999,7 @@
             }
 
             // 2. 登場アニメーションの準備
-            const cards = document.querySelectorAll('.video-card, .bottom-ad-area, .profile-card, .privacy-area, h1, h2, .subtitle');
+            const cards = document.querySelectorAll('.video-card, .bottom-ad-area, .profile-card, .about-card, .privacy-area, h1, h2, .subtitle');
 
             cards.forEach((card) => {
                 // ランダムな初期位置（X, Y）と回転角度を生成
