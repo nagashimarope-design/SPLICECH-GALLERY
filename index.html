@@ -250,9 +250,15 @@
             border: 1px dashed #d2d2d7;
             box-shadow: none;
             justify-content: center;
-            align-items: center;
+            align-items: stretch; /* 横幅いっぱいに広告タグを広げる */
             padding: 8px;
-            min-height: auto;
+            min-height: 160px; /* 広告が潰れないよう最低限の高さを確保 */
+            box-sizing: border-box;
+        }
+
+        .video-card.ad-card ins {
+            width: 100%;
+            height: 100%;
         }
 
         .video-card.ad-card:hover {
