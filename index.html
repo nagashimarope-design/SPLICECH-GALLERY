@@ -250,7 +250,8 @@
             background: transparent;
             border: 1px dashed #d2d2d7;
             box-shadow: none;
-            grid-column: span 2; /* 広告を2枠分の幅に広げ、幅不足によるエラーを防ぐ */
+            grid-column: 1 / -1; /* 横幅全体（専用行）を占有 */
+            display: flex;
             justify-content: center;
             align-items: center;
             padding: 8px;
@@ -262,6 +263,7 @@
         .video-card.ad-card ins {
             display: inline-block;
             width: 100%;
+            max-width: 728px; /* 広告の最大幅を制限して中央寄せを際立たせる */
             height: 100px;
         }
 
@@ -565,16 +567,6 @@
                     <iframe src="https://www.youtube.com/embed/OZIiaxxTarY" allowfullscreen></iframe>
                 </div>
             </div>
-
-            <!-- Ad 1 -->
-            <div class="video-card ad-card">
-                <span class="ad-label">Sponsored</span>
-                <ins class="adsbygoogle" style="display:inline-block;width:100%;height:100px;" data-ad-client="pub-7913939428080109"
-                    data-ad-slot="6879195118" data-ad-format="horizontal"
-                    data-full-width-responsive="false"></ins>
-                <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
-            </div>
-
             <!-- Video 4 -->
             <div class="video-card">
                 <div class="video-wrapper">
@@ -594,7 +586,7 @@
                 </div>
             </div>
 
-            <!-- Ad 2 -->
+            <!-- Ad 1 -->
             <div class="video-card ad-card">
                 <span class="ad-label">Sponsored</span>
                 <ins class="adsbygoogle" style="display:inline-block;width:100%;height:100px;" data-ad-client="pub-7913939428080109"
@@ -621,16 +613,6 @@
                     <iframe src="https://www.youtube.com/embed/Ki6uZzjiKZs" allowfullscreen></iframe>
                 </div>
             </div>
-
-            <!-- Ad 3 -->
-            <div class="video-card ad-card">
-                <span class="ad-label">Sponsored</span>
-                <ins class="adsbygoogle" style="display:inline-block;width:100%;height:100px;" data-ad-client="pub-7913939428080109"
-                    data-ad-slot="6879195118" data-ad-format="horizontal"
-                    data-full-width-responsive="false"></ins>
-                <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
-            </div>
-
             <!-- Video 10 -->
             <div class="video-card">
                 <div class="video-wrapper">
@@ -650,7 +632,7 @@
                 </div>
             </div>
 
-            <!-- Ad 4 -->
+            <!-- Ad 2 -->
             <div class="video-card ad-card">
                 <span class="ad-label">Sponsored</span>
                 <ins class="adsbygoogle" style="display:inline-block;width:100%;height:100px;" data-ad-client="pub-7913939428080109"
@@ -671,8 +653,6 @@
                     <iframe src="https://www.youtube.com/embed/f_9swSkVgGU" allowfullscreen></iframe>
                 </div>
             </div>
-
-            <!-- 4段目 (追加・動画IDは仮のものです。適宜書き換えてください) -->
             <!-- Video 15 -->
             <div class="video-card">
                 <div class="video-wrapper">
@@ -697,6 +677,16 @@
                     <iframe src="https://www.youtube.com/embed/KsIPcYH1j3g" allowfullscreen></iframe>
                 </div>
             </div>
+
+            <!-- Ad 3 -->
+            <div class="video-card ad-card">
+                <span class="ad-label">Sponsored</span>
+                <ins class="adsbygoogle" style="display:inline-block;width:100%;height:100px;" data-ad-client="pub-7913939428080109"
+                    data-ad-slot="6879195118" data-ad-format="horizontal"
+                    data-full-width-responsive="false"></ins>
+                <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+            </div>
+
             <!-- Video 19 -->
             <div class="video-card">
                 <div class="video-wrapper">
@@ -708,6 +698,15 @@
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/Hd2bXDFD33o" allowfullscreen></iframe>
                 </div>
+            </div>
+
+            <!-- Ad 4 -->
+            <div class="video-card ad-card">
+                <span class="ad-label">Sponsored</span>
+                <ins class="adsbygoogle" style="display:inline-block;width:100%;height:100px;" data-ad-client="pub-7913939428080109"
+                    data-ad-slot="6879195118" data-ad-format="horizontal"
+                    data-full-width-responsive="false"></ins>
+                <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
             </div>
         </div>
 
