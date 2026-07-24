@@ -250,7 +250,9 @@
             background: transparent;
             border: 1px dashed #d2d2d7;
             box-shadow: none;
-            display: block; /* display: flex から block に変更し、AdSenseのサイズ計算エラーを防ぐ */
+            grid-column: span 2; /* 広告を2枠分の幅に広げ、幅不足によるエラーを防ぐ */
+            justify-content: center;
+            align-items: stretch;
             padding: 8px;
             min-height: 160px; /* 広告が潰れないよう最低限の高さを確保 */
             box-sizing: border-box;
@@ -258,7 +260,7 @@
 
         .video-card.ad-card ins {
             width: 100%;
-            height: auto; /* height: 100% から auto に変更し、AdSense側の高さ決定に任せる */
+            height: 100%;
         }
 
         .video-card.ad-card:hover {
@@ -566,7 +568,7 @@
             <div class="video-card ad-card">
                 <span class="ad-label">Sponsored</span>
                 <ins class="adsbygoogle" style="display:block" data-ad-client="pub-XXXXXXXXXXXXXXXX"
-                    data-ad-slot="9999999999" data-ad-format="auto"
+                    data-ad-slot="9999999999" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86"
                     data-full-width-responsive="true"></ins>
                 <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
             </div>
@@ -594,7 +596,7 @@
             <div class="video-card ad-card">
                 <span class="ad-label">Sponsored</span>
                 <ins class="adsbygoogle" style="display:block" data-ad-client="pub-XXXXXXXXXXXXXXXX"
-                    data-ad-slot="9999999999" data-ad-format="auto"
+                    data-ad-slot="9999999999" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86"
                     data-full-width-responsive="true"></ins>
                 <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
             </div>
@@ -622,7 +624,7 @@
             <div class="video-card ad-card">
                 <span class="ad-label">Sponsored</span>
                 <ins class="adsbygoogle" style="display:block" data-ad-client="pub-XXXXXXXXXXXXXXXX"
-                    data-ad-slot="9999999999" data-ad-format="auto"
+                    data-ad-slot="9999999999" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86"
                     data-full-width-responsive="true"></ins>
                 <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
             </div>
@@ -650,7 +652,7 @@
             <div class="video-card ad-card">
                 <span class="ad-label">Sponsored</span>
                 <ins class="adsbygoogle" style="display:block" data-ad-client="pub-XXXXXXXXXXXXXXXX"
-                    data-ad-slot="9999999999" data-ad-format="auto"
+                    data-ad-slot="9999999999" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86"
                     data-full-width-responsive="true"></ins>
                 <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
             </div>
